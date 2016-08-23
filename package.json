@@ -33,8 +33,8 @@
   "scripts": {
     "postinstall": "bash ./bin/install-hooks.sh",
     "build:config": "node build/config.frameworks.js",
-    "build:browser": "webpack --config build/webpack.browser.config.js",
-    "build:native": "webpack --config build/webpack.native.config.js",
+    "build:browser": "npm run build:config && webpack --config build/webpack.browser.config.js",
+    "build:native": "npm run build:config && webpack --config build/webpack.native.config.js",
     "build:examples": "webpack --config build/webpack.examples.config.js",
     "build:examples:vue": "webpack --config build/webpack.examples.vue.config.js",
     "build:test": "webpack --config build/webpack.test.config.js",
