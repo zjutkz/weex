@@ -3,6 +3,7 @@ import Text from './text'
 // import Vlist from './vlist'
 // import Hlist from './hlist'
 import Scrollable from './scrollable'   // TODO
+// import NativeScrollable from './nativescrollable'
 // import Countdown from './countdown'
 // import Marquee from './marquee'
 import Slider from './slider'
@@ -28,6 +29,7 @@ export default {
     Weex.install(Image)
     Weex.install(Text)
     Weex.install(Scrollable)    // TODO
+    // Weex.install(NativeScrollable)
     // Weex.install(Countdown)
     // Weex.install(Marquee)
     Weex.install(Slider)

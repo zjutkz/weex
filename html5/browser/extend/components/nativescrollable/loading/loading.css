@@ -1,0 +1,6 @@
+.weex-loading {
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  background-color: #eee;
+}
