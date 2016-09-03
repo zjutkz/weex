@@ -147,7 +147,7 @@ Weex.prototype = {
     )
 
     if (!instance) {
-      return console.error('[h5-render] createInstance error: get void for instance.')
+      return console.warn('[h5-render] createInstance error: get void for instance.')
     }
 
     if (instance instanceof Error) {
