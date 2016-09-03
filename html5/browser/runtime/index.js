@@ -1,12 +1,10 @@
 'use strict'
 
 import './shared'
-// import init from '../../runtime/init'
-import init from './init'
-import frameworks from './config'
+import init from '../../runtime/init'
+import frameworks from '../../runtime/config'
 import { Document, Element, Comment } from '../../vdom'
 import { subversion } from '../../../package.json'
-// import * as methods from '../../default/api/methods'
 import * as methods from '../../default/api/methods'
 import Listener from '../dom/componentManager'
 
