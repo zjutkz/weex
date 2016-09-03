@@ -2,7 +2,7 @@
 
 import './shared'
 import init from '../../runtime/init'
-import frameworks from './config'
+import frameworks from '../../runtime/config'
 import { Document, Element, Comment } from '../../vdom'
 import { subversion } from '../../../package.json'
 import * as methods from '../../default/api/methods'
