@@ -1,5 +1,3 @@
-/* global lib */
-
 'use strict'
 
 import './scrollable.css'
@@ -126,6 +124,8 @@ function init (Weex) {
   extend(Scrollable.prototype, {
     style: extend(Object.create(Component.prototype.style), style)
   })
+  extend(Scrollable.prototype, { event })
+
   return Scrollable
 }
 

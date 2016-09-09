@@ -1,8 +1,7 @@
 'use strict'
 
 import './loading.css'
-
-const parents = ['scroller', 'list', 'vlist']
+// const parents = ['scroller', 'list', 'vlist']
 
 const DEFAULT_CLAMP = 130
 const DEFAULT_ALIGN_ITEMS = 'center'
@@ -39,6 +38,7 @@ const proto = {
   },
 
   onRemove () {
+    const parent = this.getParent()
     parent.node.removeEventListener('scroll', getScrollHandler(this))
   }
 }
@@ -46,10 +46,12 @@ const proto = {
 const attr = {
   display: function (val) {
     if (val === 'show') {
-      return this.node.style.visibility = 'visible'
+      this.node.style.visibility = 'visible'
+      return
     }
     if (val === 'hide') {
-      return this.node.style.visibility = 'hidden'
+      this.node.style.visibility = 'hidden'
+      return
     }
     console.error(`[h5-render] attr 'display' of <refresh>': value ${val} is invalid. Should be 'show' or 'hide'.`)
   }
