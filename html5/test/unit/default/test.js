@@ -45,23 +45,9 @@ chai.use(sinonChai)
 const callNativeSpy = sinon.spy()
 global.callNative = function () {}
 
-const callAddElementSpy = sinon.spy()
-global.callAddElement = function () {}
-
 describe('test input and output', () => {
   const oriCallNative = global.callNative
-  const oriCallAddElement = global.callAddElement
   const allDocs = {}
-
-  function callAddElementWrapper (name, ref, json, index, cbId) {
-    callAddElementSpy(ref, json, index)
-
-    const doc = allDocs[name]
-
-    doc.addElement(ref, json, index)
-
-    return callAddElementSpy.args.length
-  }
 
   function callNativeWrapper (name, tasks, cbId) {
     callNativeSpy(tasks)
@@ -98,14 +84,10 @@ describe('test input and output', () => {
   beforeEach(() => {
     callNativeSpy.reset()
     global.callNative = callNativeWrapper
-
-    callAddElementSpy.reset()
-    global.callAddElement = callAddElementWrapper
   })
 
   afterEach(() => {
     global.callNative = oriCallNative
-    global.callAddElement = oriCallAddElement
   })
 
   it('single case', () => {
@@ -166,7 +148,6 @@ describe('test input and output', () => {
     framework.createInstance(name, inputCode)
     const expected = eval('(' + outputCode + ')')
     const actual = doc.toJSON()
-
     expect(actual).eql(expected)
 
     framework.destroyInstance(name)
@@ -874,23 +855,11 @@ describe('test input and output', () => {
 
 describe('test callNative signals', () => {
   const oriCallNative = global.callNative
-  const oriCallAddElement = global.callAddElement
 
   function genCallNativeWrapper (count) {
     return (name, tasks, cbId) => {
       callNativeSpy(tasks)
       const length = callNativeSpy.args.length
-      if (length > count) {
-        return -1
-      }
-      return length
-    }
-  }
-
-  function genCallAddElementWrapper (count) {
-    return (name, ref, json, index, cbId) => {
-      callAddElementSpy(ref, json, index)
-      const length = callAddElementSpy.args.length
       if (length > count) {
         return -1
       }
@@ -912,12 +881,10 @@ describe('test callNative signals', () => {
 
   beforeEach(() => {
     callNativeSpy.reset()
-    callAddElementSpy.reset()
   })
 
   afterEach(() => {
     global.callNative = oriCallNative
-    global.callAddElement = oriCallAddElement
   })
 
   it('signals control', function () {
@@ -928,14 +895,10 @@ describe('test callNative signals', () => {
 
     function run (calls) {
       callNativeSpy.reset()
-      callAddElementSpy.reset()
       global.callNative = genCallNativeWrapper(calls)
-      global.callAddElement = genCallAddElementWrapper(calls)
-
       framework.createInstance(name + calls, inputCode)
       framework.destroyInstance(name + calls)
-      expect(callNativeSpy.args.length).eql(2)
-      expect(callAddElementSpy.args.length).eql(60)
+      expect(callNativeSpy.args.length).eql(calls + 2)
     }
 
     for (let i = 5; i < 60; i++) {
@@ -951,14 +914,10 @@ describe('test callNative signals', () => {
 
     function run (calls) {
       callNativeSpy.reset()
-      callAddElementSpy.reset()
       global.callNative = genCallNativeWrapper(calls)
-      global.callAddElement = genCallAddElementWrapper(calls)
       framework.createInstance(name + calls, inputCode)
       framework.destroyInstance(name + calls)
-
-      expect(callNativeSpy.args.length).eql(2)
-      expect(callAddElementSpy.args.length).eql(903)
+      expect(callNativeSpy.args.length).eql(calls + 2)
     }
 
     run(10)

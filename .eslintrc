@@ -16,7 +16,6 @@
     "window": false,
     "location": false,
     "callNative": false,
-    "callAddElement":false,
     "callJS": false
   },
 

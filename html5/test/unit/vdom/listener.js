@@ -5,13 +5,11 @@ const { expect } = chai
 chai.use(sinonChai)
 
 global.callNative = function () {}
-global.callAddElement = function () {}
 
 import { Document } from '../../../vdom'
 import Listener from '../../../vdom/listener'
 
 global.callNative = function () {}
-global.callAddElement = function () {}
 
 describe('dom listener basic', () => {
   it('works with no handler', () => {

@@ -26,42 +26,7 @@ function genCallTasks (id) {
     if (!Array.isArray(tasks)) {
       tasks = [tasks]
     }
-
-    // const addElementTask = tasks.filter(task => {
-    //   return task.module === 'dom' && task.method === 'addElement'
-    // });
-    //
-    // const otherTasks = tasks.filter(task => {
-    //   return task.module !== 'dom' || task.method !== 'addElement'
-    // });
-
-    // console.log('====>', addElementTask)
-    // console.log('----->', otherTasks)
-
-    tasks.forEach(task => {
-      if (task.module === 'dom' && task.method === 'addElement') {
-        const [ref, json, index] = task.args
-        callAddElement(id, ref, json, index, '-1')
-      }
-      else {
-        callNative(id, [task], '-1')
-      }
-    })
-
-    // let returnValue;
-    // if (otherTasks && otherTasks.length) {
-    //   returnValue = callNative(id, otherTasks, '-1')
-    // }
-    //
-    // if (addElementTask && addElementTask.length) {       // dom.addElement
-    // // if (false) {
-    //   addElementTask.forEach(task => {
-    //     const [ref, json, index] = task.args
-    //     callAddElement(id, ref, json, index, -1)
-    //   });
-    // }
-    //
-    // return returnValue;
+    return callNative(id, tasks, '-1')
   }
 }
 
